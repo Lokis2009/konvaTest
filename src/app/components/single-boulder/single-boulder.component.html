@@ -1,0 +1,46 @@
+<div class="container">
+  <div class="header" *ngIf="routeInfo">
+    <input type="text" ngModel="{{routeInfo.name}}" disabled>
+    <!--<button class="saveButton" mat-raised-button color="green"  (click)="save()">Save changes</button>-->
+  </div>
+  <div class="content" *ngIf="routeInfo">
+    <div style="" class="wrapper">
+      <div class="gallery" *ngIf="routeInfo.images">
+        <div class="mainPhoto">
+          <img src="{{routeInfo.images[0].url}}" alt="" (load)="getCanvasWidth()" id="mainImage">
+        </div>
+      </div>
+      <ko-stage #stage [config]="configStage" *ngIf="routeInfo.images">
+        <ko-layer #layer>
+          <ko-circle *ngFor="let circle of circleArr; let i = index"
+                     [config]="circle"
+                     (dragmove)="moveCircle($event, i)"
+                     (mouseover)="setPointer()"
+                     (mouseout)="defaultCursor()"
+          ></ko-circle>
+          <ko-line #line [config]="configLine">
+          </ko-line>
+        </ko-layer>
+      </ko-stage>
+    </div>
+    <div class="description">
+      <div class="angularRow">
+        <div class="leftPart">
+
+        </div>
+        <div class="rightPart">
+        </div>
+      </div>
+      <div class="angularRow">
+        </div>
+      </div>
+      <div class="angularRow">
+        <div class="rightPart">
+      </div>
+      <div class="angularRow">
+      </div>
+      <div class="createdRow">
+      </div>
+    </div>
+  </div>
+</div>
